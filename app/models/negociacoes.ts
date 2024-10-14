@@ -1,7 +1,8 @@
 import { Negociacao } from "./negociacao.js";
 
 export class Negociacoes {
-    private listaNegociacoes: Array<Negociacao>;
+    // private listaNegociacoes: Array<Negociacao>; - Raise TypeError: Cannot read properties of undefined (reading 'push')
+    private listaNegociacoes: Negociacao[] = [];
 
 
     adicionar(negociacao: Negociacao) {
@@ -10,8 +11,5 @@ export class Negociacoes {
 
     listar(): ReadonlyArray<Negociacao> {
         return this.listaNegociacoes;
-        /*for (let negociacao of Negociacoes.listaNegociacoes) {
-            console.log(negociacao)
-        }*/
     }
 }

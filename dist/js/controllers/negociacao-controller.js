@@ -1,30 +1,16 @@
 import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/negociacoes.js";
 import { NegociacoesView } from "../views/negociacoes-view.js";
-
 export default class NegociacaoController {
-    /**
-     * Constroi objetos de Negociacoes(), extraindo dados dos inputs front-end.
-     * Atualiza a <table/> das negociações, criando-a no primeiro momento
-     * @adicionar - Chama os metodos internos criaNegociacao() e limpaForm().
-     * @criaNegociacao - Utiliza os valores dos inputs HTML para criar um objeto de negociação.
-     * @limparForm - Limpa o formulário após o submit de um cadastro.
-     */
-    private inputData: HTMLInputElement;
-    private inputQuantidade: HTMLInputElement;
-    private inputValor: HTMLInputElement;
-    private negociacoes = new Negociacoes();
-    private negociacoesView = new NegociacoesView('#negociacoesView');
-    
-
     constructor() {
+        this.negociacoes = new Negociacoes();
+        this.negociacoesView = new NegociacoesView('#negociacoesView');
         this.inputData = document.querySelector('#data');
         this.inputQuantidade = document.querySelector('#quantidade');
         this.inputValor = document.querySelector('#valor');
         this.negociacoesView.update(this.negociacoes);
     }
-
-    adicionar(): void {
+    adicionar() {
         const negociacao = this.criaNegociacao();
         // const data_test = new Date(negociacao.data)
         const data_string_day = negociacao.data.getDate().toString();
@@ -35,22 +21,19 @@ export default class NegociacaoController {
         this.negociacoesView.update(this.negociacoes);
         this.limparForm();
     }
-
-    criaNegociacao(): Negociacao {
+    criaNegociacao() {
         /**
          * Utiliza os valores dos inputs HTML para criar um objeto de negociação.
          * Tratamento dos dados provinientes dos inputs
          * @returns Objeto de Negociacao()
          */
-        const exp = /-/g
+        const exp = /-/g;
         const date = new Date(this.inputData.value.replace(exp, (',')));
         const quantidade = parseInt(this.inputQuantidade.value);
         const valor = parseFloat(this.inputValor.value);
-
         return new Negociacao(date, quantidade, valor);
     }
-
-    limparForm(): void {
+    limparForm() {
         /**
          * Limpa o formulário após um cadastro de Negociacao()
          * A classe previne o comportamento do refresh da página
