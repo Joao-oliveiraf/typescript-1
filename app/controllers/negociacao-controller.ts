@@ -43,7 +43,7 @@ export default class NegociacaoController {
     criaNegociacao(): Negociacao {
         /**
          * Utiliza os valores dos inputs HTML para criar um objeto de negociação.
-         * Tratamento dos dados provinientes dos inputs
+         * Tratamento dos dados provenientes dos inputs
          * @returns Objeto de Negociacao()
          */
         const exp = /-/g
