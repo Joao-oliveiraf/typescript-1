@@ -1,11 +1,13 @@
 import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/negociacoes.js";
+import { MensagemView } from "../views/mensagem-view.js";
 import { NegociacoesView } from "../views/negociacoes-view.js";
 
 export default class NegociacaoController {
     /**
      * Constroi objetos de Negociacoes(), extraindo dados dos inputs front-end.
-     * Atualiza a <table/> das negociações, criando-a no primeiro momento
+     * Atualiza a <table/> das negociações, chamando a NegociacoesView()
+     * Renderiza mensagens de confirmação da MensagensView()
      * @adicionar - Chama os metodos internos criaNegociacao() e limpaForm().
      * @criaNegociacao - Utiliza os valores dos inputs HTML para criar um objeto de negociação.
      * @limparForm - Limpa o formulário após o submit de um cadastro.
@@ -15,6 +17,7 @@ export default class NegociacaoController {
     private inputValor: HTMLInputElement;
     private negociacoes = new Negociacoes();
     private negociacoesView = new NegociacoesView('#negociacoesView');
+    private mensagemView = new MensagemView('#mensagemView');
     
 
     constructor() {
@@ -25,14 +28,15 @@ export default class NegociacaoController {
     }
 
     adicionar(): void {
+        /**
+         * Cria negociação;
+         * Atualização a view de negociacoes;
+         * Atualiza a view de mensagens de confirmação.
+         */
         const negociacao = this.criaNegociacao();
-        // const data_test = new Date(negociacao.data)
-        const data_string_day = negociacao.data.getDate().toString();
-        const data_string_month = negociacao.data.getMonth().toString();
-        const data_string_year = negociacao.data.getFullYear().toString();
-        console.log(data_string_day + '/' + data_string_month + '/' + data_string_year);
         this.negociacoes.adicionar(negociacao);
         this.negociacoesView.update(this.negociacoes);
+        this.mensagemView.update(this.negociacoes);
         this.limparForm();
     }
 
