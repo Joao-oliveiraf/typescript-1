@@ -3,10 +3,11 @@ export class View {
         this.element = document.querySelector(selector);
     }
     update(model) {
+        /**
+         * Utiliza a propriedade "element" do construtor que é um DOM Element;
+         * Adiciona HTML proveniente da função template() dentro da TAG "element"
+         */
         const template = this.template(model);
         this.element.innerHTML = template;
-    }
-    template(model) {
-        throw Error('Classe filha precisa implementar o método template()');
     }
 }

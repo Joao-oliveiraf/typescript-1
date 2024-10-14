@@ -1,7 +1,7 @@
 import { Negociacoes } from "../models/negociacoes.js";
 import { View } from "./views.js";
 
-export class NegociacoesView extends View {
+export class NegociacoesView extends View<Negociacoes> {
     /**
      * Responsável por criar o HTML da table em um elemento pré-existente no DOM
      * @template - Retorna uma string da table a ser convertida
@@ -39,8 +39,4 @@ export class NegociacoesView extends View {
         `;
     }
 
-    update(model: Negociacoes): void {
-        const template = this.template(model);
-        this.element.innerHTML = template;
-    }
 }
