@@ -11,6 +11,9 @@ export abstract class View<T> {
 
     constructor(selector: string, escapar?:boolean){
         this.element = document.querySelector(selector);
+        if (escapar) {
+            this.escapar = escapar;
+        }
     }
 
     public update(model: T, escapar?:boolean): void {
