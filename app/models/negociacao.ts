@@ -9,7 +9,6 @@ export class Negociacao {
     
 
     static conversorDeParametros(data: string, quantidade: string, valor: string): Negociacao {
-
         /**
          * Trata os dados de inputs para criar um objeto de negociação.
          * @params - document.querySelector(#HTMLElement).value

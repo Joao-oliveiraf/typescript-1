@@ -7,17 +7,22 @@ export abstract class View<T> {
      * Implementa metodos update e template.
      */
     protected element: HTMLElement; // Acesso somente com Herança ou propria classe.
+    protected escapar: boolean = false;
 
-    constructor(selector: string){
+    constructor(selector: string, escapar?:boolean){
         this.element = document.querySelector(selector);
     }
 
-    public update(model: T, text?:string): void {
+    public update(model: T, escapar?:boolean): void {
         /**
          * Utiliza a propriedade "element" do construtor que é um DOM Element;
          * Adiciona HTML proveniente da função template() dentro da TAG "element"
          */
-        const template = this.template(model);
+        let template = this.template(model);
+        if (escapar){
+            const exp = "/<script>[\s\S]*?<\/script>/"
+            template.replace(exp, '')
+        }
         this.element.innerHTML = template;
     }
     protected abstract template(model: T): string;
