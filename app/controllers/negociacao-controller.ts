@@ -32,9 +32,13 @@ export default class NegociacaoController {
         /**
          * Cria negociação;
          * Atualização a view de negociacoes;
-         * Atualiza a view de mensagens de confirmação.
+         * Atualiza a view de mensagens de confirmação ou erros.
          */
-        const negociacao = this.criaNegociacao();
+        const negociacao = Negociacao.conversorDeParametros(
+            this.inputData.value,
+            this.inputQuantidade.value,
+            this.inputValor.value
+        );
         if (this.isWeekDay(negociacao.data)) {
             
             this.negociacoes.adicionar(negociacao);
@@ -43,25 +47,8 @@ export default class NegociacaoController {
             return ;
         } 
         this.mensagemView.update('Negociacoes somente em dias uteis')
-        
-        
 
     }
-
-    private criaNegociacao(): Negociacao {
-        /**
-         * Utiliza os valores dos inputs HTML para criar um objeto de negociação.
-         * Tratamento dos dados provenientes dos inputs
-         * @returns Objeto de Negociacao()
-         */
-        const exp = /-/g
-        const date = new Date(this.inputData.value.replace(exp, (',')));
-        const quantidade = parseInt(this.inputQuantidade.value);
-        const valor = parseFloat(this.inputValor.value);
-
-        return new Negociacao(date, quantidade, valor);
-    }
-
     private limparForm(): void {
         /**
          * Limpa o formulário após um cadastro de Negociacao()
