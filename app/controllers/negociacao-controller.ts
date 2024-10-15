@@ -1,3 +1,4 @@
+import { DiasDaSemana } from "../enums/dias-da-semana.js";
 import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/negociacoes.js";
 import { MensagemView } from "../views/mensagem-view.js";
@@ -27,20 +28,27 @@ export default class NegociacaoController {
         this.negociacoesView.update(this.negociacoes);
     }
 
-    adicionar(): void {
+    public adicionar(): void {
         /**
          * Cria negociação;
          * Atualização a view de negociacoes;
          * Atualiza a view de mensagens de confirmação.
          */
         const negociacao = this.criaNegociacao();
-        this.negociacoes.adicionar(negociacao);
-        this.negociacoesView.update(this.negociacoes);
-        this.mensagemView.update(this.negociacoes);
-        this.limparForm();
+        if (this.isWeekDay(negociacao.data)) {
+            
+            this.negociacoes.adicionar(negociacao);
+            this.limparForm();
+            this.atualiza_view();
+            return ;
+        } 
+        this.mensagemView.update('Negociacoes somente em dias uteis')
+        
+        
+
     }
 
-    criaNegociacao(): Negociacao {
+    private criaNegociacao(): Negociacao {
         /**
          * Utiliza os valores dos inputs HTML para criar um objeto de negociação.
          * Tratamento dos dados provenientes dos inputs
@@ -54,7 +62,7 @@ export default class NegociacaoController {
         return new Negociacao(date, quantidade, valor);
     }
 
-    limparForm(): void {
+    private limparForm(): void {
         /**
          * Limpa o formulário após um cadastro de Negociacao()
          * A classe previne o comportamento do refresh da página
@@ -66,5 +74,12 @@ export default class NegociacaoController {
         this.inputValor.value = '';
         this.inputValor.placeholder = 'Valor da negociação';
         this.inputData.focus();
+    }
+    private atualiza_view(): void {
+        this.negociacoesView.update(this.negociacoes);
+        this.mensagemView.update('Nova negociacao adicionada');
+    }
+    private isWeekDay(data: Date) {
+        return data.getDay() > DiasDaSemana.DOMINGO && data.getDay() < DiasDaSemana.SABADO;
     }
 }

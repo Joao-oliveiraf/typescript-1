@@ -8,11 +8,11 @@ export class Negociacoes {
     private listaNegociacoes: Negociacao[] = [];
 
 
-    adicionar(negociacao: Negociacao) {
+    public adicionar(negociacao: Negociacao) {
         this.listaNegociacoes.push(negociacao);
     }
 
-    listar(): ReadonlyArray<Negociacao> {
+     public listar(): ReadonlyArray<Negociacao> {
         return this.listaNegociacoes;
     }
 }

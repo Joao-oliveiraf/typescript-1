@@ -12,7 +12,7 @@ export abstract class View<T> {
         this.element = document.querySelector(selector);
     }
 
-    update(model: T): void {
+    public update(model: T, text?:string): void {
         /**
          * Utiliza a propriedade "element" do construtor que é um DOM Element;
          * Adiciona HTML proveniente da função template() dentro da TAG "element"
@@ -20,7 +20,7 @@ export abstract class View<T> {
         const template = this.template(model);
         this.element.innerHTML = template;
     }
-    abstract template(model: T): string;
+    protected abstract template(model: T): string;
     /**
      * Adiciona as propriedades do(s) model(s) em uma template string de HTML
      * @returns - Uma string contendo codigo HTML e.g:'<p>${model.propriedade}</p>'

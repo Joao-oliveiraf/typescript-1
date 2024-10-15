@@ -9,7 +9,7 @@ export class NegociacoesView extends View<Negociacoes> {
      */
 
 
-    template(model: Negociacoes): string {
+    protected template(model: Negociacoes): string {
         /**
          * Adiciona as propriedades dos models em uma template string de HTML
          * Utiliza o map() para percorrer uma array de objetos, lendo as propriedades destes, escrevendo-as em <tr> e <td>.
@@ -29,7 +29,7 @@ export class NegociacoesView extends View<Negociacoes> {
             ${model.listar()?.map(negociacao => { // ? Operator verifica se a array está vazia
                 return `
                 <tr>
-                    <td>${new Intl.DateTimeFormat().format(negociacao.data)}</td>
+                    <td>${this.formatar_data(negociacao.data)}</td>
                     <td>${negociacao.quantidade}</td>
                     <td>${negociacao.valor}</td>
                 </tr>`;
@@ -37,6 +37,11 @@ export class NegociacoesView extends View<Negociacoes> {
             </tbody>
         </table>
         `;
+    }
+
+    private formatar_data(data: Date): string {
+        return new Intl.DateTimeFormat().format(data);
+
     }
 
 }
