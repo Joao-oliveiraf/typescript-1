@@ -1,3 +1,5 @@
+import { logarTempoDeExecucao } from "../decorators/logar-tempo-de-execucao.js";
+
 export abstract class View<T> {
     /**
      * Classe Pai das Views.
@@ -17,7 +19,7 @@ export abstract class View<T> {
             this.escapar = escapar;
         }
     }
-
+    @logarTempoDeExecucao()
     public update(model: T, escapar?:boolean): void {
         /**
          * Utiliza a propriedade "element" do construtor que é um DOM Element;

@@ -6,6 +6,7 @@
         "noImplicitAny": true,
         "removeComments": true,
         "strictNullChecks": true,
+        "experimentalDecorators": true
     },
     "include": ["app/src/**/*", "app/src/controllers", "app/src/enums", "app/src/models", "app/src/views", "app/src/app.ts"]
 }
