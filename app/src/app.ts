@@ -1,4 +1,6 @@
-import NegociacaoController from "./controllers/negociacao-controller.js";
+import NegociacaoController from "../src/controllers/negociacao-controller.js";
+
+
 const controller = new NegociacaoController();
 const form = document.querySelector('.form');
 if (form) {
@@ -6,7 +8,7 @@ if (form) {
         event.preventDefault();
         console.log(controller.adicionar());
     });
+}else {
+    throw Error('Verifique a existência do form!')
 }
-else {
-    throw Error('Verifique a existência do form!');
-}
+

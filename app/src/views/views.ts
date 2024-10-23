@@ -1,6 +1,3 @@
-import { Negociacao } from "../models/negociacao";
-import { Negociacoes } from "../models/negociacoes";
-
 export abstract class View<T> {
     /**
      * Classe Pai das Views.
