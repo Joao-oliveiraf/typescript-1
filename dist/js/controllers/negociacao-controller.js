@@ -14,11 +14,6 @@ export default class NegociacaoController {
         this.negociacoesView.update(this.negociacoes);
     }
     adicionar() {
-        /**
-         * Cria negociação;
-         * Atualização a view de negociacoes;
-         * Atualiza a view de mensagens de confirmação ou erros.
-         */
         const negociacao = Negociacao.conversorDeParametros(this.inputData.value, this.inputQuantidade.value, this.inputValor.value);
         if (this.isWeekDay(negociacao.data)) {
             this.negociacoes.adicionar(negociacao);
@@ -29,11 +24,6 @@ export default class NegociacaoController {
         this.mensagemView.update('Negociacoes somente em dias uteis');
     }
     limparForm() {
-        /**
-         * Limpa o formulário após um cadastro de Negociacao()
-         * A classe previne o comportamento do refresh da página
-         * Esse metódo garante que os inputs estarão limpos após um cadastro.
-         */
         this.inputData.value = '';
         this.inputQuantidade.value = '';
         this.inputQuantidade.placeholder = 'Quantidade de negociações';
