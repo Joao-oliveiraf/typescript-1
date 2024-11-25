@@ -1,3 +1,4 @@
+import { domInjector } from "../decorators/dom-injector.js";
 import { logarTempoDeExecucao } from "../decorators/logar-tempo-de-execucao.js";
 import { DiasDaSemana } from "../enums/dias-da-semana.js";
 import { Negociacao } from "../models/negociacao.js";
@@ -14,8 +15,11 @@ export default class NegociacaoController {
      * @criaNegociacao - Utiliza os valores dos inputs HTML para criar um objeto de negociação.
      * @limparForm - Limpa o formulário após o submit de um cadastro.
      */
+    @domInjector('#data')
     private inputData: HTMLInputElement;
+    @domInjector('#quantidade')
     private inputQuantidade: HTMLInputElement;
+    @domInjector('#valor')
     private inputValor: HTMLInputElement;
     private negociacoes = new Negociacoes();
     private negociacoesView = new NegociacoesView('#negociacoesView');
@@ -23,9 +27,6 @@ export default class NegociacaoController {
     
 
     constructor() {
-        this.inputData = document.querySelector('#data') as HTMLInputElement;
-        this.inputQuantidade = document.querySelector('#quantidade') as HTMLInputElement;
-        this.inputValor = document.querySelector('#valor') as HTMLInputElement;
         this.negociacoesView.update(this.negociacoes);
     }
     @logarTempoDeExecucao()
@@ -49,6 +50,25 @@ export default class NegociacaoController {
         } 
         this.mensagemView.update('Negociacoes somente em dias uteis')
 
+    }
+    importaDados(): void {
+        fetch('http://localhost:8080/dados') // Acessa o endpoint
+        .then(res => res.json()) // Converte a response em um JSON
+        .then((dados: any[]) => { 
+        return dados.map(dadoDeHoje => { // retorna uma array de Negociacoes() criadas a partir dos dados do JSON
+            return new Negociacao(
+                new Date(),
+                dadoDeHoje.vezes,
+                dadoDeHoje.montante
+            )
+        })  
+        })
+        .then(negociacoesDeHoje => { // Add na array de NegociacaoController.negociacoes
+            negociacoesDeHoje.forEach(negociacao => {
+                this.negociacoes.adicionar(negociacao)
+            });
+            this.negociacoesView.update(this.negociacoes) // Utilizando o metodo listar(), atualiza a view com todas as negociacoes
+        });
     }
     private limparForm(): void {
         /**
