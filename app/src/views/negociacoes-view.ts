@@ -1,3 +1,4 @@
+import { escapar } from "../decorators/escapar.js";
 import { Negociacoes } from "../models/negociacoes.js";
 import { View } from "./views.js";
 
@@ -8,7 +9,7 @@ export class NegociacoesView extends View<Negociacoes> {
      * @update - Com a string de template(), renderiza o elemento no DOM.
      */
 
-
+    @escapar
     protected template(model: Negociacoes): string {
         /**
          * Adiciona as propriedades dos models em uma template string de HTML

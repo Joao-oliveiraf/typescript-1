@@ -19,7 +19,7 @@ export default class NegociacaoController {
     private inputValor: HTMLInputElement;
     private negociacoes = new Negociacoes();
     private negociacoesView = new NegociacoesView('#negociacoesView');
-    private mensagemView = new MensagemView('#mensagemView', true);
+    private mensagemView = new MensagemView('#mensagemView');
     
 
     constructor() {
