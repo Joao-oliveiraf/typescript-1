@@ -19,7 +19,6 @@ export function domInjector(seletor: string) {
 
             if (!elemento){
                 elemento = <HTMLElement>document.querySelector(seletor);// Assume que o retorno do querySelector será um HTMLElement
-                console.log(`target = ${target.constructor.name}, propertyKey = ${propertyKey}, seletor = ${seletor}`)
             }
             return elemento
         }

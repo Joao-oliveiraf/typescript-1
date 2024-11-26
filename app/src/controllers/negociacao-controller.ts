@@ -4,10 +4,11 @@ import { DiasDaSemana } from "../enums/dias-da-semana.js";
 import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/negociacoes.js";
 import { NegociacoesService } from "../services/negociacoes-service.js";
+import { imprimir } from "../utils/imprimir.js";
 import { MensagemView } from "../views/mensagem-view.js";
 import { NegociacoesView } from "../views/negociacoes-view.js";
 
-export default class NegociacaoController {
+export default class NegociacaoController {// Apenas UMA herança, MULTIPLAS Interfaces
     /**
      * Constroi objetos de Negociacoes(), extraindo dados dos inputs front-end.
      * Atualiza a <table/> das negociações, chamando a NegociacoesView()
@@ -45,6 +46,8 @@ export default class NegociacaoController {
         );
         if (this.isWeekDay(negociacao.data)) {
             this.negociacoes.adicionar(negociacao);
+            imprimir(negociacao);
+            imprimir(this.negociacoes);
             this.limparForm();
             this.atualiza_view();
             return ;

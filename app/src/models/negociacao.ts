@@ -1,4 +1,6 @@
-export class Negociacao {
+import { Imprimivel } from "../utils/imprimivel.js";
+
+export class Negociacao implements Imprimivel {// Apenas UMA herança, MULTIPLAS Interfaces
     /**
      * Model que define uma negociacao
      * 
@@ -41,7 +43,7 @@ export class Negociacao {
         return data_formatada
     }
 
-    /*public toString() {
-        return `Data: ${this.data_formatada} - Quantidade: ${this.quantidade} - Valor: R$${this.valor}`;
-    }*/
+    public paraTexto() {
+        return `Data: ${this.data_formatada} - Quantidade: ${this.quantidade} - Valor: R$${this.valor} - paraTexto()`;
+    }
 }
