@@ -22,7 +22,4 @@ export class Negociacao {
         const data_formatada = (this._data.getDay() + "/" + this._data.getMonth() + "/" + this._data.getFullYear());
         return data_formatada;
     }
-    toString() {
-        return `Data: ${this.data_formatada} - Quantidade: ${this.quantidade} - Valor: R$${this.valor}`;
-    }
 }

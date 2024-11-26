@@ -44,7 +44,6 @@ export default class NegociacaoController {
             this.inputValor.value
         );
         if (this.isWeekDay(negociacao.data)) {
-            
             this.negociacoes.adicionar(negociacao);
             this.limparForm();
             this.atualiza_view();

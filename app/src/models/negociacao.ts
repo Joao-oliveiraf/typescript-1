@@ -41,7 +41,7 @@ export class Negociacao {
         return data_formatada
     }
 
-    public toString() {
+    /*public toString() {
         return `Data: ${this.data_formatada} - Quantidade: ${this.quantidade} - Valor: R$${this.valor}`;
-    }
+    }*/
 }
